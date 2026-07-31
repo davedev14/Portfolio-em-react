@@ -9,6 +9,14 @@ const StarBackground = () => {
     useEffect(() => {
        generateStars();
        generateMeteors();
+
+       const handleResize = () => {
+        generateStars();
+       }
+
+       window.addEventListener('resize', handleResize);
+
+       return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const generateStars = () => {
@@ -70,7 +78,7 @@ const StarBackground = () => {
                 height: meteors.size + "px",
                 left: meteors.x + "%",
                 top: meteors.y + "%",
-                animationDelay: meteors.opacity,
+                animationDelay: meteors.delay,
                 animationDuration: meteors.animationDuration + "s",
             }}/>
         ))}
